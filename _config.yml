@@ -2,7 +2,6 @@ title: kurihada # 站点标题
 description: | # 头像背后的信息（html格式），<br/>代表换行
   某大学在读<br/>
   永远喜欢加藤惠<br/>
-  啊这<br/>
   ACM<br/>
   <a href="mailto:i@wu-kan.cn">
     <i class="fas fa-envelope"></i>
@@ -407,7 +406,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                   ></script>
                 </div>
             wordcount: # 全站字数统计
-              enable: false # 本地调试时建议关闭，非常影响站点生成速度（所需时间与博文数量的平方成正比）
+              enable: true # 本地调试时建议关闭，非常影响站点生成速度（所需时间与博文数量的平方成正比）
               prepend: <i class="fas fa-user-edit fa-fw"></i>
               kilo: 千
               unit: 字
