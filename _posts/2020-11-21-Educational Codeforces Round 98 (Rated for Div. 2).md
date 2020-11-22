@@ -1,6 +1,6 @@
 ---
 title: 2020-11-21-Educational Codeforces Round 98 (Rated for Div. 2)
-tags: ACM
+tags: ACM,codeforces
 renderNumberedHeading: true
 grammar_cjkRuby: true
 ---
