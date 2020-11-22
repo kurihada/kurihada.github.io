@@ -113,3 +113,112 @@ signed main(){
 	return 0;
 }
 ```
+## C. Two Brackets
+#### 题目大意
+给你一个字符串，不在乎位序，只要前后对应就行，求可以删除的括号对数
+####  思路
+从左往右遍历分别记录左括号的个数，遇到右括号的时候判断对应的左括号数量是否为0，不为0即可完成一次匹配
+#### AC Code
+
+```cpp 
+#pragma GCC optimize("-Ofast","-funroll-all-loops")
+#include<cstdio>
+#include<algorithm>
+#include<iostream>
+#include<cstring>
+#include<math.h>
+using namespace std;
+#define endl '\n'
+#define INF 0x3f3f3f3f
+// #define int long long
+#define debug(a) cout<<#a<<"="<<a<<endl;
+typedef long long ll;
+const double PI=acos(-1.0);
+const double e=exp(1.0);
+const int M=1e9+7;
+const int N=2e5+7;
+inline int mymax(int x,int y){return x>y?x:y;}
+inline int mymin(int x,int y){return x<y?x:y;}
+string s;
+int a, b;
+void solve(){
+	cin>>s;
+	a=b=0;
+	int ans=0;
+	for(int i=0; i<s.length(); i++){
+		if(s[i]=='(') ++a;
+		else if(s[i]=='[') ++b;
+		else if(s[i]==')' && a) ++ans, --a;
+		else if(s[i]==']' && b) ++ans, --b;
+ 	}
+	cout<<ans<<endl;
+	return ;
+}
+signed main(){
+	int T;
+	cin>>T;
+	while(T--) solve();
+	return 0;
+}
+```
+
+## D. Radio Towers
+#### 题目大意
+给你一个n代表城镇的数量，每个城镇可以安装一个信号塔，每个信号塔具有一个功率（可以传到周围的最远距离，范围$1,2,…,n$），需要满足：
+城镇$0$和$n + 1$没有从无线电塔收到任何信号；
+$2，…，n$个城镇分别从一个无线电塔获取信号。
+求使得上述情况成立的概率，结果对998244353取模
+#### 思路
+每项的分子为斐波那契数列，所以可以提前打表记录n对应的斐波那契数，分母为$2^n$，求一下其逆元即可
+#### AC Code
+
+``` cpp
+#pragma GCC optimize("-Ofast","-funroll-all-loops")
+#include<cstdio>
+#include<algorithm>
+#include<iostream>
+#include<cstring>
+#include<math.h>
+using namespace std;
+#define endl '\n'
+#define INF 0x3f3f3f3f
+#define int long long
+#define debug(a) cout<<#a<<"="<<a<<endl;
+typedef long long ll;
+const double PI=acos(-1.0);
+const double e=exp(1.0);
+const int M=998244353;
+const int N=2e5;
+inline int mymax(int x,int y){return x>y?x:y;}
+inline int mymin(int x,int y){return x<y?x:y;}
+int n, f[N+9];
+
+int quick_pow(int a, int b)
+{ 
+	int res = 1;
+	while (b)
+	{
+		if (b & 1)
+			res = res * a % M;
+		a = a * a % M;
+		b >>= 1;
+	}
+	return res;
+}
+
+void init(){
+    f[1]=f[2]=1;
+    for(int i=3; i<=N; i++) f[i]=(f[i-1]+f[i-2])%M;
+}
+
+void solve(){
+    cin>>n;
+    cout<<f[n]*quick_pow(quick_pow(2,n), M-2)%M<<endl;
+    return ;
+}
+signed main(){
+    init();
+    solve();
+    return 0;
+}
+```
