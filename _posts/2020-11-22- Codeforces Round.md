@@ -1,6 +1,6 @@
 ---
 title: 2020-11-22- Codeforces Round 684 (Div. 2)
-tags: ACM,
+tags: ACM
 renderNumberedHeading: true
 grammar_cjkRuby: true
 ---
