@@ -4,6 +4,7 @@ tags: ACM
 renderNumberedHeading: true
 grammar_cjkRuby: true
 ---
+
 ###### [题目传送门](https://codeforces.com/contest/1452)
 ## A. Robot Program
 #### 题目大意
@@ -24,4 +25,4 @@ x\*y & = & x==y \\
 2\*min(x,y)-1 & else xy
 \end{aligned}
 \right.
-$$
+$$+
