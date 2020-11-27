@@ -196,3 +196,84 @@ signed main(){
 	return 0;
 }
 ```
+## D. Number into Sequence
+#### 题目大意
+给你一个数$n(2≤n≤10^{10})$，求满足下列条件的最长序列
+每个$a_i$都严格大于$1$；
+$a_1⋅a_2⋅...⋅a_k=n$（即此序列的乘积为n）;
+对于每个$i$，$a_i + 1$可被$a_i$整除，从$1$到$k-1$；
+$k$是最大可能值（即此序列的长度是最大可能值）
+#### 思路
+素数筛打表$1e5$，判断n对其中素数是否能整除，求出对于该数的最大倍数，答案即为最长的倍数的素数的，个数为可以除的次数
+#### AC Code
+
+``` cpp
+#pragma GCC optimize("-Ofast","-funroll-all-loops")
+#include<cstdio>
+#include<algorithm>
+#include<iostream>
+#include<cstring>
+#include<math.h>
+using namespace std;
+#define endl '\n'
+#define INF 0x3f3f3f3f
+// #define int long long
+#define debug(a) cout<<#a<<"="<<a<<endl;
+typedef long long ll;
+const double PI=acos(-1.0);
+const double e=exp(1.0);
+const int M=1e9+7;
+const int N=2e5+7;
+inline int mymax(int x,int y){return x>y?x:y;}
+inline int mymin(int x,int y){return x<y?x:y;}
+
+bool vis[N];
+ll prime[N], p[N], x;
+void oulasai(int n)
+{
+    vis[1]=1;
+    for(int i=2;i<=n;i++)
+    {
+        if(!vis[i]) prime[x++]=i, p[i]=i;
+        for(int j=0;j<x;j++)
+        {
+            if(i*prime[j]>n) break;
+            vis[i*prime[j]]=true;
+            p[i*prime[j]]=prime[j];
+            if(i%prime[j]==0) break;
+        }
+    }
+} 
+ll n;
+void solve(){
+    cin>>n;
+    ll mx=1, idx=-1;
+    for(int i=0; i<x; i++){
+        if(n%prime[i]==0){
+            ll ans=0, now=n;
+            while(now%prime[i]==0){
+                ++ans;
+                now/=prime[i];
+            }
+            if(ans>mx){
+                mx=ans;
+                idx=prime[i];
+            }
+        }
+    }
+    cout<<mx<<endl;
+    for(int i=1; i<=mx-1; i++){
+        cout<<idx<<" ";
+        n/=idx;
+    }
+    cout<<n<<endl;
+    return ;
+}
+signed main(){
+    oulasai(1e5);
+    int T;
+    cin>>T;
+    while(T--) solve();
+    return 0;
+}
+```
